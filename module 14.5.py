@@ -109,7 +109,7 @@ class RegistrationState(StatesGroup):
     username = State()
     email = State()
     age = State()
-    balance = State('100')
+    balance = State()
 
 
 @dp.message_handler(text='Регистрация')
@@ -139,7 +139,6 @@ async def set_email(message, state):
 @dp.message_handler(state=RegistrationState.age)
 async def set_age(message, state):
     await state.update_data(age=message.text)
-#    await state.update_data(balance=1000)
     datauser = await state.get_data()
     add_user(**datauser)
     await message.answer('Регистрация прошла успешно!')
